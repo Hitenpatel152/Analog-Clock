@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Clock</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+	<style type="text/css">
+		.clock{
+			background: #ececec;
+			height: 300px;
+			width:300px;
+			border-radius: 50%;
+			margin: 8% auto 0;
+			border:14px solid #333;
+			position: relative;
+			box-shadow: 0 2vw 4vw -1vw rgba(0,0,0,0.8);
+		}
+		.dot{
+			height: 14px;
+			width: 14px;
+			border-radius: 50%;
+			background: #ccc;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			margin: auto;
+			position: absolute;
+			z-index: 10;
+			box-shadow: 0 2px 2px -1px black;
+
+		}
+		.hour-hand{
+			position: absolute;
+			z-index: 5;
+			width: 5px;
+			height: 65px;
+			background: blue;
+			top:79px;
+			left: 50%;
+			margin-left: -2px;
+			transform-origin: 50% 72px;
+			border-top-left-radius: 50%;
+			border-top-right-radius: 50%;
+		}
+		.minute-hand
+		{
+			position: absolute;
+			background: #000;
+			left: 50%;
+			z-index: 6;
+			width: 5px;
+			height: 100px;
+			top: 46px;
+			transform-origin: 50% 105px;
+			margin-left: -2px;
+			border-top-left-radius: 50%;
+			border-top-right-radius: 50%;
+		}
+		.second-hand
+		{
+			position: absolute;
+			background: #888;
+			left: 50%;
+			z-index: 7;
+			width: 3px;
+			height: 120px;
+			top: 26px;
+			transform-origin: 50% 125px;
+			margin-left: -1px;
+			border-top-left-radius: 50%;
+			border-top-right-radius: 50%;
+		}
+		span{
+			font-size: 22px;
+			position: absolute;
+			font-family: 'poiret One';
+			display: inline-block;
+			color: red;
+			font-weight: 700;
+			z-index: 4;
+		}
+		.h12{
+			top: 30px;
+			left: 50%;
+			margin-left: -10px;
+		}
+		.h6{
+			bottom: 30px;
+			left: 50%;
+			margin-left: -3px;
+		}
+		.h3{
+			top: 140px;
+			right: 30px;
+		}
+		.h9{
+			top: 140px;
+			left: 30px;
+		}
+	
+		.date{
+			position: absolute;
+			width: 120;
+			height: 20px;
+			border-radius: 7px;
+			background-color: #888;
+			text-align: center;
+			line-height: 20px;
+			color: #fff;
+			font-size: 11px;
+			top: 80px;
+			left: 50%;
+			margin-left: -30px;
+			font-family: 'poiret One';
+			font-weight: 700;
+			z-index: 3;
+			letter-spacing: 3px;
+		}
+		.day
+		{
+			position: absolute;
+			width: 120;
+			height: 20px;
+			border-radius: 7px;
+			background-color: #888;
+			text-align: center;
+			line-height: 20px;
+			color: #fff;
+			font-size: 11px;
+			top: 200px;
+			left: 50%;
+			margin-left: -30px;
+			font-family: 'poiret One';
+			font-weight: 700;
+			z-index: 3;
+			letter-spacing: 3px;
+		}
+	</style>
+	
+</head>
+<body>
+	<div class="clock">
+		<div>
+			<center><div class="date"></div></center>
+			<center><div class="day"></div></center>
+		</div>
+		<div class="dot"></div>
+		<div>
+			<div class="hour-hand"></div>
+			<div class="minute-hand"></div>
+			<div class="second-hand"></div>
+		</div>
+		<div>
+			<span class="h3">3</span> 
+			<span class="h6">6</span> 
+			<span class="h9">9</span> 
+			<span class="h12">12</span> 
+		</div>
+	</div>
+	<script type="text/javascript">
+	
+
+		function clock() {
+			
+			var weekday = new Array(7);
+			var d = new Date(),
+			h = d.getHours(),
+			m = d.getMinutes(),
+			s = d.getSeconds(),
+			date = d.getDate(),
+			month = d.getMonth()+1,
+			year = d.getFullYear(),
+
+			hdeg = h * 30 + m * (360/720),
+			mdeg = m * 6 + s/10,
+			sdeg = s * 6,
+			
+
+			he1 =document.querySelector('.hour-hand'),
+			me1 = document.querySelector('.minute-hand'),
+			se1 = document.querySelector('.second-hand'),
+			datee1 = document.querySelector('.date'),
+			daye1 = document.querySelector('.day');
+			
+			weekday[0] = "Sunday";
+			weekday[0] = "Monday";
+			weekday[0] = "Tuesday";
+			weekday[0] = "Wednesday";
+			weekday[0] = "Thursday";
+			weekday[0] = "Friday";
+			weekday[0] = "Saturday";
+			
+			var day = weekday[d.getDay()];
+			he1.style.transform = "rotate("+hdeg+"deg)";
+			me1.style.transform = "rotate("+mdeg+"deg)";
+			se1.style.transform = "rotate("+sdeg+"deg)";
+			datee1.innerHTML = date+"-"+month+"-"+year ;
+			daye1.innerHTML = day;
+			setTimeout(clock, 1000);
+		}
+		window.onload=clock;
+		
+	</script>
+	
+</body>
+</html>
